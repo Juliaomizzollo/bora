@@ -7,7 +7,7 @@ body {
 }
 
 
-/* CABEÇALHO */
+
 header {
   background-color: #1e3a8a;
   color: white;
@@ -24,7 +24,7 @@ header h1 {
 }
 
 
-/* LOGO E TOPO */
+
 .topo {
   display: flex;
   align-items: center;
@@ -41,7 +41,7 @@ header h1 {
 }
 
 
-/* MENU DE NAVEGAÇÃO */
+
 nav ul {
   display: flex;
   justify-content: center;
@@ -71,7 +71,7 @@ nav a:hover {
 }
 
 
-/* CAPA */
+
 .capa img {
   width: 100%;
   height: 60vh;
@@ -80,7 +80,7 @@ nav a:hover {
 }
 
 
-/* SEÇÕES GERAIS */
+
 main {
   padding: 2em;
 }
@@ -91,7 +91,7 @@ main {
 }
 
 
-/* INTRODUÇÃO */
+
 .intro {
   background-color: #f9f9f9;
   padding: 2em;
@@ -125,7 +125,7 @@ main {
 }
 
 
-/* CARROSSEL */
+
 .carrossel-container {
   position: relative;
   overflow: hidden;
@@ -306,7 +306,7 @@ main {
 }
 
 
-/* SOBRE MIM */
+
 .sobre-mim {
   background-color: #fdf2f2;
   padding: 2em;
@@ -371,7 +371,7 @@ main {
 }
 
 
-/* CONTATO */
+
 .intro-contato h2 {
   text-align: center;
   color: #1e3a8a;
@@ -386,7 +386,7 @@ main {
 }
 
 
-/* FORMULÁRIO */
+
 .formulario-container {
   max-width: 600px;
   margin: 0 auto;
@@ -434,7 +434,7 @@ main {
 }
 
 
-/* RODAPÉ */
+
 footer {
   background-color: #1e3a8a;
   color: white;
@@ -446,7 +446,7 @@ footer {
 }
 
 
-/* SLIDES DAS FOTOS */
+
 .slide {
   min-width: 300px;
   scroll-snap-align: center;
@@ -472,7 +472,7 @@ footer {
 }
 
 
-/* RELATOS */
+
 .relatos-galeria {
   display: flex;
   flex-wrap: wrap;
@@ -514,7 +514,7 @@ footer {
 }
 
 
-/* PRÓLOGO DESTACADO */
+
 .prologo {
   display: flex;
   justify-content: center;
@@ -639,7 +639,7 @@ carrossel {
 }
 
 
-/* Lightbox */
+
 .lightbox {
   display: none;
   justify-content: center;
@@ -729,7 +729,7 @@ carrossel {
 }
 
 
-/* Estilo do modal (zoom) */
+
 .modal {
   display: none;
   position: fixed;
@@ -1059,10 +1059,10 @@ button {
   display: block;
 }
 .imagem-centralizada {
-  display: block;         /* Para que o margin auto funcione */
-  margin: 0 auto 1.5rem;  /* Centraliza horizontalmente e adiciona espaço embaixo */
-  max-width: 700px;       /* Ajuste o tamanho máximo que quiser */
-  width: 100%;            /* Para ficar responsivo */
-  height: auto;           /* Mantém proporção */
-  border-radius: 8px;     /* Borda arredondada opcional */
+  display: block;         
+  margin: 0 auto 1.5rem;  
+  max-width: 700px;       
+  width: 100%;           
+  height: auto;           
+  border-radius: 8px;    
 }
