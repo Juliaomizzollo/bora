@@ -24,116 +24,111 @@
 
   <main>
     <section class="formulario-container">
-      <form id="form-contato" class="formulario-contato" action="https://formsubmit.co/julia.omizzollo@estudante.ifto.edu.br" method="POST">
-        <label for="nome">Nome</label>
-        <input type="text" id="nome" name="nome" required>
-   
-        <label for="email">E-mail</label>
-        <input type="email" id="email" name="email" required>
-   
-        <label for="telefone">Telefone</label>
-        <input type="tel" id="telefone" name="telefone" required placeholder="(63) 91234-5678">
-   
-        <label for="mensagem">Mensagem</label>
-        <textarea id="mensagem" name="mensagem" rows="5" required></textarea>
+     <form id="form-contato" class="formulario-contato" action="https://formsubmit.co/julia.omizzollo@estudante.ifto.edu.br" method="POST" novalidate>
+  <label for="nome">Nome</label>
+  <input type="text" id="nome" name="nome" required />
+  <div class="erro" id="erro-nome"></div>
 
-        <input type="hidden" name="_next" value="https://juliaomizzollo.github.io/memoriasje/">
-   
-        <button type="submit">Enviar</button>
+  <label for="email">E-mail</label>
+  <input type="email" id="email" name="email" required />
+  <div class="erro" id="erro-email"></div>
 
-        <div id="mensagem-sucesso" style="display: none; color: green; margin-top: 1rem;">
-          ✅ Enviado com sucesso!
-        </div>
-      </form>
-    </section>
-  </main>
+  <label for="telefone">Telefone</label>
+  <input type="tel" id="telefone" name="telefone" required placeholder="(99) 99999-9999" />
+  <div class="erro" id="erro-telefone"></div>
+
+  <label for="mensagem">Mensagem</label>
+  <textarea id="mensagem" name="mensagem" rows="5" required></textarea>
+  <div class="erro" id="erro-mensagem"></div>
+
+  <button type="submit">Enviar</button>
+</form>
+
+<div id="mensagem-sucesso" style="display:none; color: green; margin-top: 1rem;">
+  ✅ Enviado com sucesso! <br />
+  <a href="form.html" style="color: blue; text-decoration: underline;">Volte para o site</a>
+</div>
 
   <footer>
     <p>&copy; 2025 Memórias de um Intercâmbio. Todos os direitos reservados.</p>
   </footer>
 
-  <script>
-    const formulario = document.getElementById("form-contato");
-    const mensagemSucesso = document.getElementById("mensagem-sucesso");
+  document.getElementById("form-contato").addEventListener("submit", function(event) {
+  event.preventDefault(); // previne envio automático
 
-    formulario.addEventListener("submit", function(event) {
-      const nome = document.getElementById("nome").value.trim();
-      const email = document.getElementById("email").value.trim();
-      const telefone = document.getElementById("telefone").value.trim();
-      const mensagem = document.getElementById("mensagem").value.trim();
-
-      const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      const regexTelefone = /^\(?\d{2}\)?\s?\d{4,5}-?\d{4}$/;
-
-      let erros = [];
-
-      if (nome.length < 2) {
-        erros.push("Digite seu nome completo.");
-      }
-
-      if (!regexEmail.test(email)) {
-        erros.push("Digite um e-mail válido.");
-      }
-
-      if (!regexTelefone.test(telefone)) {
-        erros.push("Digite um telefone válido (ex: (63) 00000-0000).");
-      }
-
-      if (mensagem.length < 5) {
-        erros.push("Escreva uma mensagem com pelo menos 5 caracteres.");
-      }
-
-      if (erros.length > 0) {
-        event.preventDefault();
-        alert("Erros no formulário:\n\n" + erros.join("\n"));
-      } else {
-        // Sucesso: deixa o formSubmit enviar e mostra mensagem de feedback
-        mensagemSucesso.style.display = "block";
-      }
-    });
-
-    document.getElementById("form-contato").addEventListener("submit", function(event) {
-  event.preventDefault();
-
+  // pega valores
   const nome = document.getElementById("nome").value.trim();
   const email = document.getElementById("email").value.trim();
   const telefone = document.getElementById("telefone").value.trim();
   const mensagem = document.getElementById("mensagem").value.trim();
 
-  const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const regexTelefone = /^\(?\d{2}\)?\s?\d{4,5}-?\d{4}$/;
+  // pega elementos de erro
+  const erroNome = document.getElementById("erro-nome");
+  const erroEmail = document.getElementById("erro-email");
+  const erroTelefone = document.getElementById("erro-telefone");
+  const erroMensagem = document.getElementById("erro-mensagem");
 
-  // esconder todas mensagens de erro antes
-  document.querySelectorAll('.mensagem-erro').forEach(el => el.style.display = 'none');
+  // reseta erros antes da validação
+  erroNome.style.display = "none";
+  erroEmail.style.display = "none";
+  erroTelefone.style.display = "none";
+  erroMensagem.style.display = "none";
 
-  let erros = [];
+  let temErro = false;
 
+  // Valida nome
   if (nome.length < 2) {
-    erros.push("Digite seu nome completo.");
-    document.getElementById("erro-nome").style.display = "block";
+    erroNome.textContent = "Digite seu nome completo.";
+    erroNome.style.display = "block";
+    temErro = true;
   }
 
+  // Valida email (regex simples)
+  const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!regexEmail.test(email)) {
-    erros.push("Digite um e-mail válido.");
-    document.getElementById("erro-email").style.display = "block";
+    erroEmail.textContent = "Digite um e-mail válido.";
+    erroEmail.style.display = "block";
+    temErro = true;
   }
 
+  // Valida telefone (exemplo para Brasil)
+  const regexTelefone = /^\(?\d{2}\)?\s?\d{4,5}-?\d{4}$/;
   if (!regexTelefone.test(telefone)) {
-    erros.push("Digite um telefone válido (ex: (63) 91234-5678).");
-    document.getElementById("erro-telefone").style.display = "block";
+    erroTelefone.textContent = "Digite um telefone válido (ex: (63) 91234-5678).";
+    erroTelefone.style.display = "block";
+    temErro = true;
   }
 
+  // Valida mensagem
   if (mensagem.length < 5) {
-    erros.push("Escreva uma mensagem com pelo menos 5 caracteres.");
-    document.getElementById("erro-mensagem").style.display = "block";
+    erroMensagem.textContent = "Escreva uma mensagem com pelo menos 5 caracteres.";
+    erroMensagem.style.display = "block";
+    temErro = true;
   }
 
-  if (erros.length === 0) {
-    // se tudo ok, enviar o form
-    this.submit();
+  if (!temErro) {
+    // Se não tiver erro, envia o formulário e mostra mensagem de sucesso
+    const form = event.target;
+    const sucesso = document.getElementById("mensagem-sucesso");
+
+    // envia o formulário via fetch para evitar redirect
+    fetch(form.action, {
+      method: form.method,
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' }
+    }).then(response => {
+      if (response.ok) {
+        form.style.display = "none";
+        sucesso.style.display = "block";
+        form.reset();
+      } else {
+        alert("Erro ao enviar o formulário. Tente novamente.");
+      }
+    }).catch(() => {
+      alert("Erro na conexão. Tente novamente.");
+    });
   }
 });
-  </script>
-
+    
 </body>
 </html>
