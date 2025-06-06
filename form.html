@@ -9,7 +9,6 @@
 </head>
 <body>
 
-
   <header>
     <h1>Diário de Memórias</h1>
     <nav>
@@ -23,10 +22,9 @@
     </nav>
   </header>
 
-
   <main>
     <section class="formulario-container">
-      <form id="form-contato" class="formulario-contato" action="https://formsubmit.co/seuemail@email.com" method="POST">
+      <form id="form-contato" class="formulario-contato" action="https://formsubmit.co/julia.omizzollo@estudante.ifto.edu.br" method="POST">
         <label for="nome">Nome</label>
         <input type="text" id="nome" name="nome" required>
    
@@ -34,79 +32,64 @@
         <input type="email" id="email" name="email" required>
    
         <label for="telefone">Telefone</label>
-        <input type="tel" id="telefone" name="telefone" required placeholder="(99) 99999-9999">
+        <input type="tel" id="telefone" name="telefone" required placeholder="(63) 91234-5678">
    
         <label for="mensagem">Mensagem</label>
         <textarea id="mensagem" name="mensagem" rows="5" required></textarea>
    
         <button type="submit">Enviar</button>
 
-
         <div id="mensagem-sucesso" style="display: none; color: green; margin-top: 1rem;">
           ✅ Enviado com sucesso!
-
-
         </div>
       </form>
     </section>
   </main>
 
-
   <footer>
     <p>&copy; 2025 Memórias de um Intercâmbio. Todos os direitos reservados.</p>
   </footer>
 
-
   <script>
-    document.getElementById("form-contato").addEventListener("submit", function(event) {
+    const formulario = document.getElementById("form-contato");
+    const mensagemSucesso = document.getElementById("mensagem-sucesso");
+
+    formulario.addEventListener("submit", function(event) {
       const nome = document.getElementById("nome").value.trim();
       const email = document.getElementById("email").value.trim();
       const telefone = document.getElementById("telefone").value.trim();
       const mensagem = document.getElementById("mensagem").value.trim();
- 
+
       const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       const regexTelefone = /^\(?\d{2}\)?\s?\d{4,5}-?\d{4}$/;
- 
+
       let erros = [];
- 
+
       if (nome.length < 2) {
         erros.push("Digite seu nome completo.");
       }
- 
+
       if (!regexEmail.test(email)) {
         erros.push("Digite um e-mail válido.");
       }
- 
+
       if (!regexTelefone.test(telefone)) {
         erros.push("Digite um telefone válido (ex: (63) 91234-5678).");
       }
- 
+
       if (mensagem.length < 5) {
         erros.push("Escreva uma mensagem com pelo menos 5 caracteres.");
       }
- 
+
       if (erros.length > 0) {
-        event.preventDefault(); // Impede o envio
+        event.preventDefault();
         alert("Erros no formulário:\n\n" + erros.join("\n"));
+      } else {
+        // Sucesso: deixa o formSubmit enviar e mostra mensagem de feedback
+        mensagemSucesso.style.display = "block";
       }
-      <script>
-  const formulario = document.querySelector(".formulario-contato");
-  const mensagem = document.getElementById("mensagem-sucesso");
-
-
-  formulario.addEventListener("submit", function(evento) {
-    evento.preventDefault(); // impede o envio de verdade
-
-
-    
-    mensagem.style.display = "block";
-
-
-  
-    formulario.reset();
-  });
-</script>
-
+    });
+  </script>
 
 </body>
 </html>
