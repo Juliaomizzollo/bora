@@ -76,7 +76,7 @@
       }
 
       if (!regexTelefone.test(telefone)) {
-        erros.push("Digite um telefone válido (ex: (63) 91234-5678).");
+        erros.push("Digite um telefone válido (ex: (63) 00000-0000).");
       }
 
       if (mensagem.length < 5) {
@@ -91,6 +91,48 @@
         mensagemSucesso.style.display = "block";
       }
     });
+
+    document.getElementById("form-contato").addEventListener("submit", function(event) {
+  event.preventDefault();
+
+  const nome = document.getElementById("nome").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const telefone = document.getElementById("telefone").value.trim();
+  const mensagem = document.getElementById("mensagem").value.trim();
+
+  const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const regexTelefone = /^\(?\d{2}\)?\s?\d{4,5}-?\d{4}$/;
+
+  // esconder todas mensagens de erro antes
+  document.querySelectorAll('.mensagem-erro').forEach(el => el.style.display = 'none');
+
+  let erros = [];
+
+  if (nome.length < 2) {
+    erros.push("Digite seu nome completo.");
+    document.getElementById("erro-nome").style.display = "block";
+  }
+
+  if (!regexEmail.test(email)) {
+    erros.push("Digite um e-mail válido.");
+    document.getElementById("erro-email").style.display = "block";
+  }
+
+  if (!regexTelefone.test(telefone)) {
+    erros.push("Digite um telefone válido (ex: (63) 91234-5678).");
+    document.getElementById("erro-telefone").style.display = "block";
+  }
+
+  if (mensagem.length < 5) {
+    erros.push("Escreva uma mensagem com pelo menos 5 caracteres.");
+    document.getElementById("erro-mensagem").style.display = "block";
+  }
+
+  if (erros.length === 0) {
+    // se tudo ok, enviar o form
+    this.submit();
+  }
+});
   </script>
 
 </body>
